@@ -1,0 +1,46 @@
+{%extends 'base/main.html'%}
+{% block content %}
+<div class=" header-bar">
+    <div>
+        <h1> TO DO LIST - {{request.user|title}}</h1>
+        <h3 style="margin:0"> 완료 : <i>{{count_succ}}개 </i> , 미완료 : <i>{{count}}개 </i></h3>
+    </div>
+</div>
+
+<p>user : {{request.user}}</p>
+
+<hr>
+
+<a id="add-link" href="{% url 'task-create'%}"> &#x2713; 할 일 추가 </a>
+
+
+<div class="task_items-wrapper">
+    {%for task in tasks%}
+    <div class="task-wrapper">
+        {%if task.complete%}
+        <div class= "task-title">
+            <div class="task-complete-icon"></div>
+            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
+        </div>
+        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+        
+        {% else %}
+        <div class= "task-title">
+            <div class="task-incomplete-icon"></div>
+            <a href="{% url 'task-update' task.id %}">{{task}}</a>
+        </div>
+        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+        {%endif%}
+        
+    </div>
+
+
+    {% empty %}
+    <h3>할 일이 없습니다.</h3>
+    {% endfor %}
+</div>
+
+
+
+{% endblock content %}
+

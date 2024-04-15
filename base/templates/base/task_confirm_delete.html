@@ -1,0 +1,16 @@
+{%extends 'base/main.html'%}
+{% block content %}
+
+<h3>Task Delete </h3>
+<a href="{% url 'tasks' %}"> 뒤로가기</a>
+
+<div class="card-body">
+    <form method="POST" >
+    {% csrf_token %}
+    <p> 할 일을 지우시겠습니까? "{{task}}"</p>
+    <input class="button" type="submit" value="Delete" />
+    </form>
+</div>
+
+
+{% endblock content %}
